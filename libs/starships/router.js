@@ -10,6 +10,7 @@ const starshipsController = new StarshipsController(starships);
 
 starshipRouter.get('/api/starships', starshipsController.getAllStarships);
 starshipRouter.get('/api/starships/:id', starshipsController.getStarship);
+starshipRouter.post('/api/starships', starshipsController.createStarship);
 starshipRouter.put('/api/starships', starshipsController.updateStarship)
 starshipRouter.delete('/api/starships/:id', starshipsController.deleteStarship);
 

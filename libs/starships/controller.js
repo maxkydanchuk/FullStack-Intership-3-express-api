@@ -7,14 +7,24 @@ export class StarshipsController {
     }
 
     getStarship = async (req, res) => {
-        const starshipId = await req.params.id;
+        const id = Number(req.params.id);
+        const starships = this.starshipsRepository;
+        const starship = await starships.find(starship => starship.pk === id);
+        res.status(200).json(starship);
+    }
+
+    createStarship = async (req, res, next) => {
+        //TODO: implement
     }
 
     updateStarship = async (req, res) => {
-        ///TODO: implement
+        //TODO: implement
     }
 
     deleteStarship = async (req, res) => {
-        await this.starshipsRepository.filter(starship => persone.id !== req.params.id);
+        const id = Number(req.params.id);
+        const starships = this.starshipsRepository;
+        const deletedStarships = await starships.filter(starship => starship.pk !== id);
+        res.status(200).json(deletedStarships);
     }
 }

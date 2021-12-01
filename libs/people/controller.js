@@ -9,6 +9,7 @@ export class PeopleController {
 
     getPersone = async (req, res) => {
         const starshipId = await req.params.id;
+        console.log(starshipId)
     }
 
     updatePersone = async (req, res) => {
