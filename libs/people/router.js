@@ -1,7 +1,12 @@
 import { Router } from "express";
-import { peopleController } from './controller.js';
+import {PeopleController} from './controller.js';
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+const people = require("../../data/people.json");
 
 const peopleRouter = Router();
+const peopleController = new PeopleController(people);
 
 
 peopleRouter.get('/api/people', peopleController.getAllPeople);

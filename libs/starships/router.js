@@ -1,7 +1,12 @@
 import { Router } from "express";
-import { starshipsController } from './controller.js';
+import { StarshipsController } from './controller.js';
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+const starships = require("../../data/starships.json");
 
 const starshipRouter = Router();
+const starshipsController = new StarshipsController(starships);
 
 starshipRouter.get('/api/starships', starshipsController.getAllStarships);
 starshipRouter.get('/api/starships/:id', starshipsController.getStarship);

@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
-import peopleRouter from "./people/router.js";
-import starshipRouter from "./starships/router.js";
+import peopleRouter from "./libs/people/router.js";
+import starshipRouter from "./libs/starships/router.js";
 import bodyParser from "body-parser";
 
 const __dirname = path.resolve();

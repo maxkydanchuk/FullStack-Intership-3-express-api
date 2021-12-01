@@ -1,9 +1,4 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-
-const starships = require("../data/starships.json");
-
-class StarshipsController {
+export class StarshipsController {
     constructor(starshipsRepository) {
         this.starshipsRepository = starshipsRepository;
     }
@@ -23,5 +18,3 @@ class StarshipsController {
         await this.starshipsRepository.filter(starship => persone.id !== req.params.id);
     }
 }
-
-export const starshipsController = new StarshipsController(starships);

@@ -1,14 +1,9 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-
-const people = require("../data/people.json");
-
-class PeopleController {
+export class PeopleController {
     constructor(peopleRepository) {
         this.peopleRepository = peopleRepository;
     }
 
-    getAllPeople = async (req, res) =>  {
+    getAllPeople = async (req, res) => {
         return res.status(200).json(this.peopleRepository);
     }
 
@@ -24,6 +19,3 @@ class PeopleController {
         await this.peopleRepository.filter(persone => persone.id !== req.params.id);
     }
 }
-
-export const peopleController = new PeopleController(people);
-
