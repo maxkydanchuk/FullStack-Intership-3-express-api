@@ -8,11 +8,9 @@ const __dirname = path.resolve();
 const PORT = process.env.PORT ?? 3000;
 const app = express();
 
+app.use(bodyParser.json());
 app.use(peopleRouter);
 app.use(starshipRouter);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(express.urlencoded({extended: false}))
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, './index.html'));
