@@ -12,8 +12,9 @@ export default class StarshipsRepository {
         return this.repositoryData.find(starship => starship.pk === id);
     }
 
-    createStarship = () => {
+    createStarship = (req) => {
         //TODO: implement
+        console.log(req.body)
     }
 
     updateStarship = () => {
@@ -23,9 +24,4 @@ export default class StarshipsRepository {
     deleteStarship = (id) => {
         return this.repositoryData.filter(starship => starship.pk !== id)
     }
-
-    // static async getAllStarships() {
-    //
-    // }
-
 }

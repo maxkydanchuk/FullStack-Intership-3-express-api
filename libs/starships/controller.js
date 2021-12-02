@@ -18,7 +18,7 @@ export default class StarshipsController {
         // const starships = this.starshipsRepository;
         //TODO: implement
         // starships.push()
-        console.log(req.body)
+        this.starshipsRepository.createStarship(req)
        await res.status(201).send('Created');
     }
 
