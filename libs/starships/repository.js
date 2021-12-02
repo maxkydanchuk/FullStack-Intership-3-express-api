@@ -3,8 +3,8 @@ export default class StarshipsRepository {
         this.repositoryData = repositoryData;
     }
 
-    getStarships =  () => {
-        return this.repositoryData;
+     getAllStarships () {
+        return  this.repositoryData;
     }
 
     getStarship = (id) => {
@@ -23,4 +23,9 @@ export default class StarshipsRepository {
     deleteStarship = (id) => {
         return this.repositoryData.filter(starship => starship.pk !== id)
     }
+
+    // static async getAllStarships() {
+    //
+    // }
+
 }

@@ -1,17 +1,15 @@
 import { Router } from "express";
-import { StarshipsController } from './controller.js';
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
 
-const starships = require("../../data/starships.json");
+const router = Router();
 
-const starshipRouter = Router();
-const starshipsController = new StarshipsController(starships);
+function StarshipRouter(controller) {
+    router.get('/api/starships', controller.getAllStarships);
+    router.get('/api/starships/:id', controller.getStarship);
+    router.post('/api/starships/', controller.createStarship);
+    router.put('/api/starships/', controller.updateStarship);
+    router.delete('/api/starships/:id', controller.deleteStarship);
 
-starshipRouter.get('/api/starships', starshipsController.getAllStarships);
-starshipRouter.get('/api/starships/:id', starshipsController.getStarship);
-starshipRouter.post('/api/starships/', starshipsController.createStarship);
-starshipRouter.put('/api/starships/', starshipsController.updateStarship);
-starshipRouter.delete('/api/starships/:id', starshipsController.deleteStarship);
+    return router;
+}
 
-export default starshipRouter;
+export default StarshipRouter;

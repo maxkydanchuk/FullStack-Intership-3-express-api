@@ -1,16 +1,16 @@
-export class StarshipsController {
-    constructor(starshipsRepository) {
+export default class StarshipsController {
+    constructor(starshipsRepository ) {
         this.starshipsRepository = starshipsRepository;
     }
     getAllStarships = async (req, res) =>  {
-        return res.status(200).json(this.starshipsRepository);
+        const result = await this.starshipsRepository.getAllStarships();
+        res.status(200).json(result);
     }
 
     getStarship = async (req, res) => {
         const id = Number(req.params.id);
-        const starships = this.starshipsRepository;
-        const starship = await starships.find(starship => starship.pk === id);
-        res.status(200).json(starship);
+        const result = await this.starshipsRepository.getStarship(id);
+        res.status(200).json(result);
     }
 
     createStarship = async (req, res) => {
