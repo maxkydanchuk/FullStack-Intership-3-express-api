@@ -14,17 +14,14 @@ export default class StarshipsController {
     }
 
     createStarship = async (req, res) => {
-        //TODO: implement
-        // const starships = this.starshipsRepository;
-        //TODO: implement
-        // starships.push()
         this.starshipsRepository.createStarship(req)
        await res.status(201).send('Created');
     }
 
     updateStarship = async (req, res) => {
-        //TODO: implement
-
+        const id = Number(req.params.id);
+        const result = await this.starshipsRepository.updateStarship(id, req);
+        res.status(200).json(result);
     }
 
     deleteStarship = async (req, res) => {

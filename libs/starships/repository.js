@@ -8,17 +8,38 @@ export default class StarshipsRepository {
     }
 
     getStarship = (id) => {
-
         return this.repositoryData.find(starship => starship.pk === id);
     }
 
     createStarship = (req) => {
-        //TODO: implement
-        console.log(req.body)
+        const body = req.body;
+        const newStarship =  {
+                fields: {
+                    pilots: [],
+                    MGLT: null,
+                    starship_class: body.fields.starship_class,
+                    hyperdrive_rating: body.fields.hyperdrive_rating,
+                },
+                model: "resources.starship",
+                pk:  Number(new Date())
+            };
+        this.repositoryData.push(newStarship)
     }
 
-    updateStarship = () => {
-        //TODO: implement
+    updateStarship = (id, req) => {
+        const body = req.body;
+        let starship = this.repositoryData.find(starship => starship.pk === id);
+        starship = {
+            ...starship,
+            fields: {
+                ...starship.fields,
+                starship_class: body.fields.starship_class,
+                hyperdrive_rating: body.fields.hyperdrive_rating,
+            },
+
+        };
+
+        return starship;
     }
 
     deleteStarship = (id) => {
