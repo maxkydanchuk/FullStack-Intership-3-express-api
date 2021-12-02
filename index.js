@@ -11,6 +11,8 @@ const app = express();
 app.use(peopleRouter);
 app.use(starshipRouter);
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(express.urlencoded({extended: false}))
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, './index.html'));
