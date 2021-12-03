@@ -39,8 +39,7 @@ export default class StarshipsRepository {
      * @param req
      * @returns {*}
      */
-    updateStarship (id, req) {
-        const body = this.getDataFromBody(req.body);
+    updateStarship (id, body) {
         let starship = this.repositoryData.find(starship => starship.pk === id);
         starship = {
             ...starship,

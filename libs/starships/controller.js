@@ -58,8 +58,9 @@ export default class StarshipsController {
      * @returns {Promise<void>}
      */
     updateStarship = async (req, res) => {
+        const body = this.getDataFromBody(req.body);
         const id = Number(req.params.id);
-        this.starshipsRepository = await this.starshipsRepository.updateStarship(id, req);
+        this.starshipsRepository = await this.starshipsRepository.updateStarship(id, body);
         res.status(200).json(this.starshipsRepository);
     }
 
