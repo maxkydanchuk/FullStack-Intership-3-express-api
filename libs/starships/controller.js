@@ -3,6 +3,14 @@ export default class StarshipsController {
         this.starshipsRepository = starshipsRepository;
     }
 
+    /**
+     * @function getDataFromBody
+     *
+     * @description Get data from request body
+     *
+     * @param body - request body
+     * @returns  {{fields: {hyperdrive_rating: string, pilots: array, MGLT: number, starship_class: string}}}
+     */
     getDataFromBody (body) {
         return {
             fields: {
@@ -13,23 +21,33 @@ export default class StarshipsController {
             }
         };
     }
+
     /**
+     * @async
+     * @function getAllStarships
+     *
+     * @description get all starships from repository data
      *
      * @param req
      * @param res
-     * @returns {Promise<void>}
+     * @returns {{{fields: {hyperdrive_rating: string, pilots: array, MGLT: number, starship_class: string}},
+     * "model": @string, "pk": number}}
      */
-
     getAllStarships = async (req, res) =>  {
         const result = await this.starshipsRepository.getAllStarships();
         res.status(200).json(result);
     }
 
     /**
+     * @async
+     * @function getStarship
+     *
+     * @description getselected starship by its primary key
      *
      * @param req
      * @param res
-     * @returns {Promise<void>}
+     * @returns {{fields: {hyperdrive_rating: string, pilots: array, MGLT: number, starship_class: string}},
+     * "model": @string, "pk": number}
      */
 
     getStarship = async (req, res) => {
@@ -39,10 +57,15 @@ export default class StarshipsController {
     }
 
     /**
+     * @async
+     * @function createStarship
+     *
+     * @description create new starship and add it to repository data
      *
      * @param req
      * @param res
-     * @returns {Promise<void>}
+     * @returns {{fields: {hyperdrive_rating: string, pilots: array, MGLT: number, starship_class: string}},
+     * "model": @string, "pk": number}
      */
 
     createStarship = async (req, res) => {
@@ -52,10 +75,15 @@ export default class StarshipsController {
     }
 
     /**
+     * @async
+     * @function updateStarship
+     *
+     * @description change the fields you choose in selected starship
      *
      * @param req
      * @param res
-     * @returns {Promise<void>}
+     * @returns {{fields: {hyperdrive_rating: string, pilots: array, MGLT: number, starship_class: string}},
+     * "model": @string, "pk": number}
      */
     updateStarship = async (req, res) => {
         const body = this.getDataFromBody(req.body);
@@ -65,10 +93,16 @@ export default class StarshipsController {
     }
 
     /**
+     * @async
+     * @function deleteStarship
+     *
+     * @description delete selected starship from repository data
      *
      * @param req
      * @param res
-     * @returns {Promise<*>}
+     *
+     * @returns {{{fields: {hyperdrive_rating: string, pilots: array, MGLT: number, starship_class: string}},
+     * "model": @string, "pk": number}}
      */
     deleteStarship = async (req, res) => {
         const id = Number(req.params.id);
