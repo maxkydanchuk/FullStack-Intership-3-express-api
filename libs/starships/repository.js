@@ -2,16 +2,6 @@ export default class StarshipsRepository {
     constructor(repositoryData) {
         this.repositoryData = repositoryData;
     }
-    getDataFromBody (body) {
-        return {
-            fields: {
-                pilots: body.fields.pilots,
-                MGLT: body.fields.MGLT,
-                starship_class: body.fields.starship_class,
-                hyperdrive_rating: body.fields.hyperdrive_rating,
-            }
-        };
-    }
     /**
      *
      * @returns {*}
@@ -33,10 +23,9 @@ export default class StarshipsRepository {
      *
      * @param req
      */
-    createStarship (req) {
-        const body = this.getDataFromBody(req.body);
+    createStarship (body) {
         const newStarship =  {
-            body,
+            ...body,
                 model: "resources.starship",
                 pk:  Number(new Date())
             };

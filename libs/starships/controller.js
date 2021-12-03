@@ -3,6 +3,16 @@ export default class StarshipsController {
         this.starshipsRepository = starshipsRepository;
     }
 
+    getDataFromBody (body) {
+        return {
+            fields: {
+                pilots: body.fields.pilots,
+                MGLT: body.fields.MGLT,
+                starship_class: body.fields.starship_class,
+                hyperdrive_rating: body.fields.hyperdrive_rating,
+            }
+        };
+    }
     /**
      *
      * @param req
@@ -36,7 +46,8 @@ export default class StarshipsController {
      */
 
     createStarship = async (req, res) => {
-        this.starshipsRepository.createStarship(req)
+        const body = this.getDataFromBody(req.body);
+        this.starshipsRepository.createStarship(body)
         await res.status(201).send('Created');
     }
 

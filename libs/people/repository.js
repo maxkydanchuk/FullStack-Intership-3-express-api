@@ -30,11 +30,13 @@ export default class PeopleRepository {
     createPerson (req) {
         const body = this.getDataFromBody(req.body);
         const newPerson =  {
-            body,
+            ...body,
             model: "resources.starship",
             pk:  Number(new Date())
         };
+
         this.repositoryData.push(newPerson)
+        console.log(this.repositoryData)
     }
 
     updatePerson (id, req) {
