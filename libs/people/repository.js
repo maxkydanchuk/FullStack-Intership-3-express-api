@@ -3,6 +3,22 @@ export default class PeopleRepository {
         this.repositoryData = repositoryData;
     }
 
+    getDataFromBody (body) {
+        return {
+            fields: {
+                name: body.fields.name,
+                gender: body.fields.gender,
+                skin_color: body.fields.skin_color,
+                hair_color: body.fields.hair_color,
+                height: body.fields.height,
+                eye_color: body.fields.eye_color,
+                mass: body.fields.mass,
+                // "homeworld": 1,
+                birth_year: body.fields.birth_year
+            }
+        }
+    }
+
     getAllPeople () {
         return  this.repositoryData;
     }
@@ -12,19 +28,9 @@ export default class PeopleRepository {
     }
 
     createPerson (req) {
-        const body = req.body;
+        const body = this.getDataFromBody(req.body);
         const newPerson =  {
-            fields: {
-                name: body.fields.name,
-                gender: body.fields.gender,
-                skin_color: body.fields.skin_color,
-                hair_color: body.fields.hair_color,
-                height: body.fields.height,
-                eye_color: body.fields.eye_color,
-                mass: body.fields.mass,
-                // "homeworld": 1,
-                birth_year: body.fields.birth_year
-            },
+            body,
             model: "resources.starship",
             pk:  Number(new Date())
         };
@@ -32,21 +38,11 @@ export default class PeopleRepository {
     }
 
     updatePerson (id, req) {
-        const body = req.body;
+        const body = this.getDataFromBody(req.body);
         let person = this.repositoryData.find(person => person.pk === id);
         person = {
             ...person,
-            fields: {
-                name: body.fields.name,
-                gender: body.fields.gender,
-                skin_color: body.fields.skin_color,
-                hair_color: body.fields.hair_color,
-                height: body.fields.height,
-                eye_color: body.fields.eye_color,
-                mass: body.fields.mass,
-                // "homeworld": 1,
-                birth_year: body.fields.birth_year
-            },
+           ...body,
         };
        const index = this.repositoryData.findIndex(el => el.pk === id);
        this.repositoryData =  [...this.repositoryData.slice(0, index), person, ...this.repositoryData.slice(index +1)];
