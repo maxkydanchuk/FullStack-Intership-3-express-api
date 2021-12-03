@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-const router = Router();
-
 function StarshipRouter(controller) {
+    const router = Router();
+
     router.get('/api/starships', controller.getAllStarships);
     router.get('/api/starships/:id', controller.getStarship);
     router.post('/api/starships/', controller.createStarship);

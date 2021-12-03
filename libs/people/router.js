@@ -1,17 +1,15 @@
 import { Router } from "express";
-import {PeopleController} from './controller.js';
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
 
-const people = require("../../data/people.json");
+function PeopleRouter(controller) {
+    const router = Router();
 
-const peopleRouter = Router();
-const peopleController = new PeopleController(people);
+    router.get('/api/people', controller.getAllPeople);
+    router.get('/api/people/:id', controller.getPerson);
+    router.post('/api/people/', controller.createPerson);
+    router.put('/api/people/:id/edit', controller.updatePerson);
+    router.delete('/api/people/:id', controller.deletePerson);
 
+    return router;
+}
 
-peopleRouter.get('/api/people', peopleController.getAllPeople);
-peopleRouter.get('/api/people/:id', peopleController.getPersone);
-peopleRouter.put('/api/people', peopleController.updatePersone)
-peopleRouter.delete('/api/people/:id', peopleController.deletePersone);
-
-export default peopleRouter;
+export default PeopleRouter;

@@ -3,46 +3,74 @@ export default class StarshipsRepository {
         this.repositoryData = repositoryData;
     }
 
+    /**
+     *
+     * @returns {*}
+     */
      getAllStarships () {
         return  this.repositoryData;
     }
 
-    getStarship = (id) => {
+    /**
+     *
+     * @param id {number}
+     * @returns {*}
+     */
+    getStarship (id) {
         return this.repositoryData.find(starship => starship.pk === id);
     }
 
-    createStarship = (req) => {
+    /**
+     *
+     * @param req
+     */
+    createStarship (req) {
         const body = req.body;
         const newStarship =  {
                 fields: {
-                    pilots: [],
-                    MGLT: null,
+                    pilots: body.fields.pilots,
+                    MGLT: body.fields.MGLT,
                     starship_class: body.fields.starship_class,
                     hyperdrive_rating: body.fields.hyperdrive_rating,
                 },
                 model: "resources.starship",
                 pk:  Number(new Date())
             };
+        console.log(newStarship)
         this.repositoryData.push(newStarship)
     }
 
-    updateStarship = (id, req) => {
+    /**
+     *
+     * @param id {number}
+     * @param req
+     * @returns {*}
+     */
+    updateStarship (id, req) {
         const body = req.body;
         let starship = this.repositoryData.find(starship => starship.pk === id);
         starship = {
             ...starship,
             fields: {
-                ...starship.fields,
+                pilots: [body.fields.pilots],
+                MGLT: body.fields.MGLT,
                 starship_class: body.fields.starship_class,
                 hyperdrive_rating: body.fields.hyperdrive_rating,
             },
-
         };
+        const index = this.repositoryData.findIndex( el => el.pk === id);
+        this.repositoryData = [...this.repositoryData.slice(0, index), starship, ...this.repositoryData.slice(index + 1)];
 
-        return starship;
+        return this.repositoryData
     }
 
-    deleteStarship = (id) => {
-        return this.repositoryData.filter(starship => starship.pk !== id)
+    /**
+     *
+     * @param id {number}
+     * @returns {*}
+     */
+    deleteStarship (id)  {
+        this.repositoryData = this.repositoryData.filter(starship => starship.pk !== id);
+        return this.repositoryData;
     }
 }

@@ -19,7 +19,7 @@
     "model": "resources.starship",
     "pk": 3
   },
-  {
+   {
     "fields": {
       "pilots": [],
       "MGLT": "70",
