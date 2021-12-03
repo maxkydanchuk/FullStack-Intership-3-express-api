@@ -48,7 +48,7 @@ export default class StarshipsController {
     createStarship = async (req, res) => {
         const body = this.getDataFromBody(req.body);
         this.starshipsRepository.createStarship(body)
-        await res.status(201).send('Created');
+        await res.status(201).send(this.starshipsRepository);
     }
 
     /**

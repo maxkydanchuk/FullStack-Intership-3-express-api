@@ -3,22 +3,6 @@ export default class PeopleRepository {
         this.repositoryData = repositoryData;
     }
 
-    getDataFromBody (body) {
-        return {
-            fields: {
-                name: body.fields.name,
-                gender: body.fields.gender,
-                skin_color: body.fields.skin_color,
-                hair_color: body.fields.hair_color,
-                height: body.fields.height,
-                eye_color: body.fields.eye_color,
-                mass: body.fields.mass,
-                // "homeworld": 1,
-                birth_year: body.fields.birth_year
-            }
-        }
-    }
-
     getAllPeople () {
         return  this.repositoryData;
     }
@@ -27,8 +11,7 @@ export default class PeopleRepository {
         return this.repositoryData.find(person => person.pk === id);
     }
 
-    createPerson (req) {
-        const body = this.getDataFromBody(req.body);
+    createPerson (body) {
         const newPerson =  {
             ...body,
             model: "resources.starship",
@@ -39,8 +22,7 @@ export default class PeopleRepository {
         console.log(this.repositoryData)
     }
 
-    updatePerson (id, req) {
-        const body = this.getDataFromBody(req.body);
+    updatePerson (id, body) {
         let person = this.repositoryData.find(person => person.pk === id);
         person = {
             ...person,
